@@ -1,21 +1,26 @@
 <?php
-// este encabezado se encarga que la respuesta del servidor sea en JSON
-header('content-type:application/json')
+// Este encabezado indica que la respuesta del servidor será en formato JSON
+header('Content-Type: application/json');
 
-// datos de conexion a la base de datos
-$host = "localhost";//cambia si tu base de datos no esta en el mismo servidor
-$usuario ="root";
-$password = " ";
-$basedatos ="app_inventario";
+// Datos de conexión a la base de datos
+$host = "localhost";
+$usuario = "root";
+$password = "";
+$baseDatos = "app_inventario";
 
-//crear la conexion
-$conexion = new mysqli{$host,$usuario,$password,$Basedatos};
+// Se crea la conexión con MySQL
+$conexion = new mysqli($host, $usuario, $password, $baseDatos,3307);
 
-//verificar conexion
-if($conexion->connect_error) {
-    echo json_encode{[
-        "success"=> false
-        "message"=>"error de conexion a la base de datos". $conexion ->connect_error
-    ]};
+// Se valida si hubo error al conectar
+if ($conexion->connect_error) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Error de conexión a la base de datos"
+    ]);
+    exit;
 }
+
+// Se define la codificación para evitar problemas con tildes y caracteres especiales
+$conexion->set_charset("utf8");
+
 ?>
